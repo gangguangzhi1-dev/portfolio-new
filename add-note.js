@@ -54,7 +54,7 @@ function loadNotes() {
 }
 
 function saveNotes(notes) {
-  const content = `const NOTES = ${JSON.stringify(notes, null, 2)};\n`;
+  const content = `var NOTES = ${JSON.stringify(notes, null, 2)};\n`;
   writeFileSync(path.join(__dirname, 'notes.js'), content, 'utf-8');
 }
 

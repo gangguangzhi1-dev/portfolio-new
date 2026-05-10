@@ -1,4 +1,4 @@
-const NOTES = [
+var NOTES = [
   {
     "url": "https://note.com/lapin_builds_/n/n493ac4f5f6ac",
     "title": "学生がAIに副業スケジュールを組んでもらったら、毎週動ける設計ができた話",
