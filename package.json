@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-new",
+  "type": "module",
+  "scripts": {
+    "add-note": "node add-note.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0"
+  }
+}

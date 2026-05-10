@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>lapin — AIと一緒に作り続ける学生</title>
+<meta name="description" content="アプリ制作・発信・Webづくりを、遊び心のある形で届けます。個人開発者 lapin のポートフォリオ。">
+<meta property="og:title" content="lapin — AIと一緒に作り続ける学生">
+<meta property="og:description" content="アプリ制作・発信・Webづくりを、遊び心のある形で届けます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&family=Caveat:wght@500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3b3a52;
+    --ink-soft:#6c6b85;
+    --ink-mute:#9a9ab2;
+    --purple:#8b7bff;
+    --purple-2:#a99bff;
+    --purple-deep:#6c5ce7;
+    --pink:#f6a5d3;
+    --pink-2:#ffc1e3;
+    --teal:#7ed7d1;
+    --teal-2:#a9e7e2;
+    --yellow:#ffd86b;
+    --cream:#fffaf3;
+    --bg:#fbf8ff;
+    --card:#ffffff;
+    --line:#e9e6f7;
+    --shadow: 0 18px 40px -22px rgba(120,110,200,.35), 0 6px 14px -10px rgba(120,110,200,.18);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"M PLUS Rounded 1c", system-ui, -apple-system, "Hiragino Maru Gothic ProN", sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(900px 500px at 8% 6%, #efeaff 0%, transparent 60%),
+      radial-gradient(700px 500px at 96% 8%, #ffe7f3 0%, transparent 60%),
+      radial-gradient(900px 600px at 50% 110%, #e6f6f4 0%, transparent 60%),
+      #fbf8ff;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative}
+
+  /* ---------- HEADER ---------- */
+  .top{
+    padding:22px 0 8px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(251,248,255,.88);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(200,190,240,.25);
+  }
+  .top-inner{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px}
+  .brand{display:flex;align-items:center;gap:8px}
+  .brand .mark{width:52px;height:52px;display:grid;place-items:center}
+  .brand .mark img{width:52px;height:52px;display:block}
+  .brand .word{font-weight:800;font-size:30px;letter-spacing:.5px;color:#5b6ad6;font-family:"Inter",sans-serif}
+
+  .nav{display:flex;gap:34px;align-items:center}
+  .nav a{display:inline-flex;align-items:center;gap:7px;font-weight:500;font-size:15px;color:#4a4a66;transition:color .2s}
+  .nav a:hover{color:#7a6cf0}
+  .nav a .dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+  .nav a:nth-child(1) .dot{background:#9bd9d3}
+  .nav a:nth-child(2) .dot{background:#c8b6ff}
+  .nav a:nth-child(3) .dot{background:#a8d49e}
+  .nav a:nth-child(4) .dot{background:#ffb6c8}
+
+  .cta-pill{
+    position:relative;display:inline-flex;align-items:center;gap:8px;
+    padding:12px 24px;border-radius:999px;color:#fff;font-weight:700;font-size:15px;
+    background:linear-gradient(95deg,#a4a4ff 0%, #b88dff 45%, #f3a4d7 100%);
+    box-shadow:0 10px 22px -10px rgba(150,120,220,.6), inset 0 -3px 0 rgba(0,0,0,.06), inset 0 2px 0 rgba(255,255,255,.5);
+    border:1px solid rgba(255,255,255,.6);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .cta-pill:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(150,120,220,.7)}
+  .cta-pill::after{content:"";position:absolute;right:14px;top:8px;width:14px;height:14px;
+    background:radial-gradient(circle,#fff 0%,rgba(255,255,255,0) 70%);opacity:.85}
+  .cta-pill .ic{width:16px;height:16px;border-radius:3px;border:1.6px solid #fff;position:relative}
+  .cta-pill .ic::before{content:"";position:absolute;inset:auto -2px -4px auto;width:6px;height:5px;
+    border-bottom:1.6px solid #fff;border-right:1.6px solid #fff;transform:rotate(-30deg)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:50px 0 70px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1.25fr;gap:30px;align-items:start}
+  .h1{
+    font-weight:900;font-size:60px;line-height:1.18;letter-spacing:.5px;
+    color:#2f2f4a;margin:8px 0 22px;
+  }
+  .h1 .row2{display:block}
+  .lead{
+    font-weight:700;font-size:21px;line-height:1.6;color:#7a6cf0;margin:0 0 20px;
+  }
+  .desc{
+    font-size:14.5px;line-height:2;color:#6c6b85;margin:0 0 28px;max-width:460px;
+  }
+  .hero-cta{display:flex;gap:18px;align-items:center;margin-bottom:22px}
+  .btn-primary{
+    position:relative;display:inline-flex;align-items:center;justify-content:space-between;gap:18px;
+    padding:16px 22px 16px 28px;min-width:200px;border-radius:999px;color:#fff;font-weight:800;font-size:17px;
+    background:linear-gradient(95deg,#9b95ff 0%, #b489ff 50%, #d49bff 100%);
+    box-shadow:0 16px 30px -16px rgba(140,110,230,.7), inset 0 -3px 0 rgba(0,0,0,.06), inset 0 2px 0 rgba(255,255,255,.45);
+    border:1px solid rgba(255,255,255,.6);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 36px -16px rgba(140,110,230,.8)}
+  .btn-primary::after{content:"";position:absolute;right:18px;top:10px;width:14px;height:14px;
+    background:radial-gradient(circle,#fff 0%,rgba(255,255,255,0) 70%);opacity:.9}
+  .btn-primary .arr{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-weight:700}
+  .btn-secondary{
+    display:inline-flex;align-items:center;justify-content:space-between;gap:18px;
+    padding:15px 22px 15px 28px;min-width:200px;border-radius:999px;
+    color:#7a6cf0;font-weight:800;font-size:16px;background:#fff;
+    border:1.6px solid #b9b3ff;box-shadow:0 8px 18px -14px rgba(120,110,200,.5);
+    transition:transform .2s, background .2s, color .2s;
+  }
+  .btn-secondary:hover{transform:translateY(-2px);background:#f3f0ff}
+  .btn-secondary .arr{width:22px;height:22px;border-radius:50%;background:#eeeaff;display:grid;place-items:center;color:#7a6cf0}
+
+  .pill-status{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:#7c7c95}
+  .pill-status .ledge{width:9px;height:9px;border-radius:50%;background:#7ed7a8;box-shadow:0 0 0 4px #d6f3e2;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px #d6f3e2}50%{box-shadow:0 0 0 7px #d6f3e2}}
+
+  .hero-vis{position:relative;min-height:480px}
+  .hero-vis .main{width:100%;display:block}
+
+  .scat{position:absolute;pointer-events:none;z-index:0}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{text-align:center;margin:30px 0 36px;position:relative}
+  .section-head .kicker{font-family:"Caveat",cursive;font-weight:700;color:#a9a3d0;font-size:22px;display:inline-flex;align-items:center;gap:10px}
+  .section-head .kicker::before, .section-head .kicker::after{content:"〜";color:#cfc9ee;font-family:inherit;font-size:18px}
+  .section-head h2{
+    font-weight:900;font-size:40px;letter-spacing:1px;color:#3a3a55;margin:6px 0 0;
+    display:inline-flex;align-items:center;gap:14px;position:relative;
+  }
+  .section-head h2::before, .section-head h2::after{
+    content:"";width:18px;height:18px;background:url('assets/part_007.png') center/contain no-repeat;display:inline-block;
+  }
+  .section-head h2::after{filter:hue-rotate(40deg)}
+
+  /* ---------- APPS SECTION ---------- */
+  .apps{padding:24px 0 70px;position:relative}
+  .apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .app-card{
+    position:relative;border-radius:22px;padding:26px;background:#fff;
+    box-shadow:var(--shadow);border:1px solid #f0ecfb;
+    display:grid;grid-template-columns:138px 1fr;gap:20px;align-items:center;
+    overflow:hidden;transition:transform .25s, box-shadow .25s;
+  }
+  .app-card:hover{transform:translateY(-5px);box-shadow:0 26px 50px -22px rgba(120,110,200,.45),0 10px 20px -12px rgba(120,110,200,.22)}
+  .app-card.pink{background:linear-gradient(135deg,#fff5fb 0%, #ffeaf4 100%);border-color:#ffd9ec}
+  .app-card.violet{background:linear-gradient(135deg,#f6f2ff 0%, #ece4ff 100%);border-color:#dfd3ff}
+  .app-card.mint{background:linear-gradient(135deg,#f0fbf9 0%, #e0f6f1 100%);border-color:#cdebe6}
+  .app-card .thumb{width:138px;height:200px;object-fit:cover;object-position:top;display:block;border-radius:12px}
+  .app-card h3{margin:0 0 10px;font-weight:800;font-size:21px;line-height:1.35}
+  .app-card.mint h3{color:#5fbab2}
+  .app-card.violet h3{color:#8a7adf}
+  .app-card.pink h3{color:#e58cba}
+  .app-card p{margin:0 0 14px;color:#6c6b85;font-size:13.5px;line-height:1.85}
+  .more-pill{
+    display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;
+    font-weight:700;font-size:13px;background:#fff;border:1.5px solid;
+    transition:background .2s;
+  }
+  .more-pill.mint{color:#5fbab2;border-color:#9fd9d3}
+  .more-pill.mint:hover{background:#f0fbf9}
+  .more-pill.violet{color:#8a7adf;border-color:#c4b6ff}
+  .more-pill.violet:hover{background:#f6f2ff}
+  .more-pill.pink{color:#e58cba;border-color:#f8c0db}
+  .more-pill.pink:hover{background:#fff5fb}
+
+  /* ---------- NOTE SECTION ---------- */
+  .notes{padding:30px 0 70px;position:relative}
+  .notes-head{display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:14px}
+  .notes-head .more{position:absolute;right:0;top:50%;transform:translateY(-50%);color:#7a6cf0;font-weight:700;font-size:14px;display:inline-flex;gap:6px;align-items:center;transition:opacity .2s}
+  .notes-head .more:hover{opacity:.7}
+  .notes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .note-card{
+    background:#fff;border-radius:18px;overflow:hidden;border:1px solid #efebfb;
+    box-shadow:var(--shadow);transition:transform .25s, box-shadow .25s;
+  }
+  .note-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -20px rgba(120,110,200,.38)}
+  .note-thumb{width:100%;height:160px;overflow:hidden}
+  .note-thumb img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+  .note-card .body{padding:14px 16px 16px}
+  .note-card .meta{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
+  .tag{display:inline-block;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;color:#fff}
+  .tag.t1{background:#c8a8ff}
+  .tag.t2{background:#7ec8e3}
+  .tag.t3{background:#a8d8b9}
+  .tag.t4{background:#f5b1c1}
+  .date{font-size:12px;color:#9a9ab2;font-weight:700;font-family:"Inter",sans-serif}
+  .note-card h4{margin:0 0 6px;font-size:15px;line-height:1.55;font-weight:800;color:#3a3a55}
+  .note-card .ex{margin:0 0 14px;font-size:12.5px;line-height:1.85;color:#7c7c95}
+  .stats{display:flex;gap:14px;color:#9a9ab2;font-size:12px;font-weight:600}
+  .stats span{display:inline-flex;align-items:center;gap:5px}
+  .stats svg{width:13px;height:13px;fill:#c5c1d8}
+
+  /* ---------- FEATURES ---------- */
+  .feats{padding:36px 0 80px;position:relative}
+  .feats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+  .feat{text-align:center;padding:8px 8px 0}
+  .feat .icbox{width:140px;height:140px;margin:0 auto 16px;display:grid;place-items:center;position:relative;border-radius:50%}
+  .feat .icbox img{width:130px;height:130px;object-fit:contain;transition:transform .3s}
+  .feat:hover .icbox img{transform:scale(1.06) translateY(-4px)}
+  .feat h5{margin:0 0 10px;font-weight:800;font-size:17px;color:#3a3a55}
+  .feat p{margin:0;font-size:13px;line-height:1.85;color:#7c7c95}
+  .feats .dotline{
+    position:absolute;top:62px;left:0;right:0;height:30px;pointer-events:none;
+    background:
+      radial-gradient(circle,#c8c1ee 1.5px,transparent 2px) 0 50%/12px 6px repeat-x;
+    mask:linear-gradient(90deg,transparent 0 12.5%, #000 12.5% 87.5%, transparent 87.5% 100%);
+  }
+
+  .appeal-bar{
+    margin:30px auto 0;max-width:780px;background:#fff;border:1.5px solid #efeafd;border-radius:22px;
+    padding:18px 26px 18px 110px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    position:relative;box-shadow:var(--shadow);
+  }
+  .appeal-bar .chick{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:78px}
+  .appeal-bar .t1{font-weight:800;font-size:18px;color:#3a3a55;margin-bottom:6px}
+  .appeal-bar .t2{font-size:12.5px;color:#7c7c95}
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap{padding:60px 0 0;position:relative}
+  .contact{
+    position:relative;border-radius:30px;padding:40px 56px 46px;
+    background:
+      radial-gradient(circle at 8% 30%,#cfd6ff 0%, transparent 60%),
+      radial-gradient(circle at 95% 80%,#ffd0ec 0%, transparent 60%),
+      linear-gradient(110deg,#dad3ff 0%,#e9d6ff 35%,#ffd6e7 70%,#ffe4d2 100%);
+    overflow:hidden;border:1px solid rgba(255,255,255,.5);
+    box-shadow:0 30px 60px -30px rgba(150,120,220,.45);
+  }
+  .contact h3{margin:0 0 6px;font-size:30px;font-weight:900;color:#3a3a55;display:inline-flex;align-items:center;gap:14px}
+  .contact h3 .cv{font-family:"Caveat",cursive;font-size:22px;color:#a9a3d0;font-weight:700}
+  .contact .copy{font-size:15.5px;color:#3a3a55;margin:8px 0 28px;font-weight:600}
+  .contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:start}
+  .small-copy{margin:0;color:#3a3a55;font-size:13px;line-height:2}
+  .socials{display:flex;gap:14px;justify-content:flex-end;margin-bottom:18px;flex-wrap:wrap}
+  .soc{
+    background:#fff;border-radius:14px;padding:12px 22px;font-weight:800;font-size:14.5px;
+    display:inline-flex;align-items:center;gap:10px;color:#3a3a55;
+    box-shadow:0 10px 20px -14px rgba(120,110,200,.45);
+    border:1px solid rgba(255,255,255,.7);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .soc:hover{transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(120,110,200,.5)}
+  .soc svg{width:18px;height:18px}
+  .soc.x svg{fill:#1a1a22}
+  .soc.note svg{fill:#26a99c}
+  .soc.gh svg{fill:#1a1a22}
+  .soc.mail svg{fill:#7a8cf0}
+  .contact-cta{
+    display:flex;justify-content:flex-end;
+    position:relative;
+  }
+  .big-pill{
+    position:relative;width:300px;padding:18px 30px;border-radius:999px;color:#fff;font-weight:900;font-size:20px;
+    display:inline-flex;align-items:center;justify-content:center;gap:14px;
+    background:linear-gradient(95deg,#a4a4ff 0%, #b88dff 45%, #f3a4d7 100%);
+    box-shadow:0 22px 36px -16px rgba(150,120,220,.7), inset 0 -3px 0 rgba(0,0,0,.06), inset 0 2px 0 rgba(255,255,255,.45);
+    border:1px solid rgba(255,255,255,.7);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .big-pill:hover{transform:translateY(-3px);box-shadow:0 28px 44px -16px rgba(150,120,220,.8)}
+  .big-pill::after{content:"";position:absolute;right:30px;top:14px;width:18px;height:18px;
+    background:radial-gradient(circle,#fff 0%,rgba(255,255,255,0) 70%);opacity:.85}
+  .big-pill .arr{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.3);display:grid;place-items:center}
+  .contact .chick-heart{position:absolute;right:60px;bottom:14px;width:96px;z-index:3}
+  .contact .envelope{position:absolute;left:330px;bottom:30px;width:80px;opacity:.9;transform:rotate(-12deg)}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:40px 0 26px;color:#7c7c95}
+  .footrow{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .ftnav{display:flex;gap:36px;font-weight:600;font-size:14px;color:#5a5a7a}
+  .ftnav a{transition:color .2s}
+  .ftnav a:hover{color:#7a6cf0}
+  .ftsoc{display:flex;gap:18px}
+  .ftsoc a{width:26px;height:26px;display:grid;place-items:center;color:#5a5a7a;transition:color .2s}
+  .ftsoc a:hover{color:#7a6cf0}
+  .ftsoc svg{width:18px;height:18px;fill:currentColor}
+  .copy-line{margin-top:18px;text-align:center;font-size:12.5px;color:#9a9ab2;font-family:"Inter",sans-serif}
+
+  /* helpers */
+  .float{animation:fl 6s ease-in-out infinite}
+  @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  section{position:relative;z-index:2}
+  header{position:relative;z-index:5}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 960px){
+    .wrap{padding:0 20px}
+    .nav{display:none}
+    .top-inner{gap:12px}
+    .cta-pill{padding:10px 18px;font-size:14px}
+    .hero{padding:28px 0 48px}
+    .hero-grid{grid-template-columns:1fr;gap:18px}
+    .h1{font-size:42px;line-height:1.2;text-align:center}
+    .lead{font-size:18px;text-align:center}
+    .desc{font-size:14px;margin:0 auto 24px;text-align:center}
+    .hero-cta{justify-content:center;flex-wrap:wrap}
+    .pill-status{justify-content:center;display:flex}
+    .hero-vis{min-height:auto;order:-1}
+    .hero-vis .main{max-width:520px;margin:0 auto}
+    .section-head h2{font-size:30px}
+    .section-head h2::before, .section-head h2::after{width:14px;height:14px}
+    .apps-grid{grid-template-columns:1fr;gap:18px}
+    .app-card{grid-template-columns:120px 1fr;padding:20px}
+    .app-card .thumb{width:120px}
+    .notes-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+    .note-card h4{font-size:14px}
+    .note-card .ex{font-size:12px}
+    .feats-grid{grid-template-columns:repeat(2,1fr);gap:24px}
+    .feats .dotline{display:none}
+    .feat .icbox{width:120px;height:120px}
+    .feat .icbox img{width:110px;height:110px}
+    .appeal-bar{padding:18px 20px 18px 96px}
+    .appeal-bar .chick{width:64px;left:12px}
+    .appeal-bar .t1{font-size:15px;text-align:center}
+    .appeal-bar .t2{font-size:12px;text-align:center}
+    .contact{padding:32px 24px 36px;border-radius:24px}
+    .contact h3{font-size:24px;flex-wrap:wrap}
+    .contact h3 .cv{font-size:18px}
+    .contact .copy{font-size:14px}
+    .contact-grid{grid-template-columns:1fr;gap:20px}
+    .socials{flex-wrap:wrap;justify-content:center;gap:10px}
+    .soc{padding:10px 16px;font-size:13px}
+    .contact-cta{justify-content:center}
+    .big-pill{width:100%;max-width:300px;font-size:17px;padding:16px 24px}
+    .contact .chick-heart{width:64px;right:14px;bottom:8px}
+    .contact .cursor, .contact .envelope{display:none}
+    .footrow{flex-direction:column;align-items:center;text-align:center;gap:18px}
+    .ftnav{flex-wrap:wrap;justify-content:center;gap:18px}
+    .scat{max-width:60px}
+  }
+
+  @media (max-width: 560px){
+    .wrap{padding:0 16px}
+    .brand .word{font-size:24px}
+    .brand .mark{width:42px;height:42px}
+    .brand .mark img{width:42px;height:42px}
+    .h1{font-size:32px}
+    .lead{font-size:16px}
+    .btn-primary, .btn-secondary{min-width:0;width:100%;font-size:15px;padding:14px 20px}
+    .hero-cta{flex-direction:column;width:100%;gap:12px}
+    .notes-grid{grid-template-columns:1fr}
+    .feats-grid{grid-template-columns:1fr 1fr;gap:16px}
+    .section-head h2{font-size:24px;gap:10px}
+    .section-head .kicker{font-size:18px}
+    .app-card{grid-template-columns:90px 1fr;padding:16px;gap:14px}
+    .app-card .thumb{width:90px}
+    .app-card h3{font-size:18px}
+    .app-card p{font-size:12.5px}
+    .scat{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">
+      <div class="mark"><img src="assets/logo_chick.png" alt="lapin"></div>
+      <div class="word">lapin</div>
+    </div>
+    <nav class="nav">
+      <a href="#apps"><span class="dot"></span>Apps</a>
+      <a href="#articles"><span class="dot"></span>Articles</a>
+      <a href="#about"><span class="dot"></span>About</a>
+      <a href="#contact"><span class="dot"></span>Contact</a>
+    </nav>
+    <a href="#contact" class="cta-pill"><span class="ic"></span>相談してみる</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="scat" src="assets/part_028.png" style="left:-40px;top:60px;width:120px;opacity:.85" alt="">
+  <img class="scat" src="assets/part_026.png" style="left:-20px;top:330px;width:90px;opacity:.85" alt="">
+  <img class="scat" src="assets/part_032.png" style="left:80px;top:560px;width:60px;opacity:.6" alt="">
+  <img class="scat" src="assets/part_006.png" style="left:280px;top:80px;width:46px" alt="">
+  <img class="scat" src="assets/part_007.png" style="right:120px;top:30px;width:34px" alt="">
+  <img class="scat" src="assets/part_006.png" style="right:-30px;top:160px;width:60px;transform:scaleX(-1)" alt="">
+  <img class="scat" src="assets/part_032.png" style="right:-20px;top:420px;width:60px;opacity:.7" alt="">
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 class="h1">AIと一緒に<span class="row2">作り続ける学生</span></h1>
+      <p class="lead">アプリ制作・発信・Webづくりを、<br>遊び心のある形で届けます。</p>
+      <p class="desc">
+        lapin は、AI とデザインを味方に<br>
+        アイデアをカタチにする学生クリエイター。<br>
+        アプリやテンプレート、note での発信を通じて、<br>
+        つくる楽しさを広げています。
+      </p>
+      <div class="hero-cta">
+        <a href="#apps" class="btn-primary">アプリを見る<span class="arr">→</span></a>
+        <a href="#contact" class="btn-secondary">制作を相談する<span class="arr">→</span></a>
+      </div>
+      <div class="pill-status"><span class="ledge"></span>&nbsp;アプリ・テンプレート・発信コンテンツを公開中！</div>
+    </div>
+    <div class="hero-vis">
+      <img class="main float" src="assets/part_008.png" alt="lapin hero illustration">
+    </div>
+  </div>
+</section>
+
+<!-- APPS -->
+<section id="apps" class="apps">
+  <img class="scat" src="assets/part_006.png" style="left:30px;top:0;width:32px" alt="">
+  <img class="scat" src="assets/part_007.png" style="left:120px;top:50px;width:24px" alt="">
+  <img class="scat" src="assets/part_032.png" style="right:30px;top:80px;width:50px;opacity:.5" alt="">
+  <img class="scat" src="assets/part_006.png" style="right:140px;top:10px;width:30px" alt="">
+
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Check it out</div>
+      <h2>アプリケーション紹介</h2>
+    </div>
+
+    <div class="apps-grid">
+      <a class="app-card mint" href="https://diary-one-self.vercel.app/" target="_blank" rel="noopener">
+        <img class="thumb" src="assets/app_diary.png" alt="Garden Diary">
+        <div>
+          <h3>Garden Diary</h3>
+          <p>日記を書くたびにお花が育つ<br>庭付き日記アプリ。<br>60日続けるとドラゴンが現れる。</p>
+          <span class="more-pill mint">詳しく見る →</span>
+        </div>
+      </a>
+      <a class="app-card violet" href="https://portfolio-blue-ten-19.vercel.app/" target="_blank" rel="noopener">
+        <img class="thumb" src="assets/app_portfolio.png" alt="Portfolio Template">
+        <div>
+          <h3>Portfolio<br>Template</h3>
+          <p>コードを書かずに更新できる<br>ポートフォリオテンプレート。<br>管理画面からすべて編集可能。</p>
+          <span class="more-pill violet">詳しく見る →</span>
+        </div>
+      </a>
+      <a class="app-card pink" href="https://tuneme-six.vercel.app/" target="_blank" rel="noopener">
+        <img class="thumb" src="assets/app_ai.png" alt="Tuneme">
+        <div>
+          <h3>Tuneme</h3>
+          <p>5つの質問に答えて<br>あなたの音楽タイプを診断。<br>32タイプから自分像が見つかる。</p>
+          <span class="more-pill pink">詳しく見る →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NOTE ARTICLES -->
+<section id="articles" class="notes">
+  <img class="scat" src="assets/part_043.png" style="left:120px;top:30px;width:140px;opacity:.85" alt="">
+  <img class="scat" src="assets/part_007.png" style="right:300px;top:0;width:24px" alt="">
+  <img class="scat" src="assets/part_006.png" style="right:120px;top:60px;width:36px" alt="">
+
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Writing</div>
+      <h2>note記事紹介</h2>
+    </div>
+    <div class="notes-head">
+      <a class="more" href="https://note.com/lapin_builds_" target="_blank" rel="noopener">もっと見る →</a>
+    </div>
+
+    <div class="notes-grid" id="notes-grid"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="about" class="feats">
+  <img class="scat" src="assets/part_028.png" style="left:-30px;top:60px;width:110px;opacity:.7" alt="">
+  <img class="scat" src="assets/part_026.png" style="right:-20px;top:60px;width:120px;opacity:.7;transform:scaleX(-1)" alt="">
+  <img class="scat" src="assets/part_032.png" style="right:60px;bottom:60px;width:60px;opacity:.6" alt="">
+  <img class="scat" src="assets/part_006.png" style="left:80px;bottom:120px;width:30px" alt="">
+
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Appeal</div>
+      <h2>こんなことができます</h2>
+    </div>
+
+    <div class="feats-grid">
+      <div class="dotline"></div>
+      <div class="feat">
+        <div class="icbox"><img src="assets/feat_idea.png" alt=""></div>
+        <h5>AIを使った発想整理</h5>
+        <p>アイデアの壁打ちや構成整理を<br>AIと一緒にスピーディに。</p>
+      </div>
+      <div class="feat">
+        <div class="icbox"><img src="assets/feat_web.png" alt=""></div>
+        <h5>見やすいLP / Webデザイン</h5>
+        <p>伝わる導線設計と、やさしい<br>デザインで魅力を引き出します。</p>
+      </div>
+      <div class="feat">
+        <div class="icbox"><img src="assets/feat_design.png" alt=""></div>
+        <h5>アプリや発信の世界観づくり</h5>
+        <p>色・フォント・トーンまで<br>一貫した世界観をつくります。</p>
+      </div>
+      <div class="feat">
+        <div class="icbox"><img src="assets/feat_comm.png" alt=""></div>
+        <h5>制作過程も共有できる柔らかい提案</h5>
+        <p>丁寧なコミュニケーションで、<br>一緒に良いものをつくります。</p>
+      </div>
+    </div>
+
+    <div class="appeal-bar">
+      <img class="chick" src="assets/part_005.png" alt="">
+      <div class="t1">作品の雰囲気を大切にしながら、伝わる形に整えます。</div>
+      <div class="t2">フリーランスの方・クリエイターの方の想いに寄り添います！お気軽にご相談ください。</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-wrap">
+  <div class="wrap">
+    <div class="contact">
+      <h3>お問い合わせ <span class="cv">Contact</span></h3>
+      <p class="copy">Web制作のご相談・コラボ・ご依頼はこちら</p>
+
+      <div class="contact-grid">
+        <div>
+          <p class="small-copy">
+            小さなご相談でも大歓迎です。<br>
+            一緒に、あなたのアイデアをカタチにしましょう！<br>
+            <br>
+            SNSのDMや、メールでお気軽にどうぞ。<br>
+            基本的に24時間以内にお返事します。
+          </p>
+        </div>
+        <div>
+          <div class="socials">
+            <a class="soc x" href="https://twitter.com/lapin_builds" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M18.244 2H21l-6.52 7.45L22 22h-6.844l-4.79-6.26L4.8 22H2.04l6.97-7.96L2 2h7.02l4.31 5.69L18.244 2zm-2.4 18h1.84L8.27 4H6.31l9.534 16z"/></svg>
+              X
+            </a>
+            <a class="soc note" href="https://note.com/lapin_builds_" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5V4zm10 1.5V8h2.5L15 5.5zM7 10v2h10v-2H7zm0 4v2h7v-2H7z"/></svg>
+              note
+            </a>
+            <a class="soc gh" href="https://github.com/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.27-5.23-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.3 3.16 1.17.92-.26 1.9-.39 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.47 3.16-1.17 3.16-1.17.62 1.58.23 2.75.11 3.04.73.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+              GitHub
+            </a>
+            <a class="soc mail" href="mailto:laping310r0109@gmail.com">
+              <svg viewBox="0 0 24 24"><path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11A2.5 2.5 0 0 1 19.5 20h-15A2.5 2.5 0 0 1 2 17.5v-11zm2.7-.5l7.3 5.4L19.3 6H4.7zM20 7.7l-7.4 5.5a1 1 0 0 1-1.2 0L4 7.7V17.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5V7.7z"/></svg>
+              Mail
+            </a>
+          </div>
+          <div class="contact-cta">
+            <a class="big-pill" href="mailto:laping310r0109@gmail.com">相談してみる<span class="arr">→</span></a>
+          </div>
+        </div>
+      </div>
+      <img class="chick-heart" src="assets/part_024.png" alt="">
+      <img class="envelope" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 48'><rect x='2' y='6' width='60' height='36' rx='3' fill='%23ffffff' stroke='%23c8b6ff' stroke-width='2'/><polyline points='4,8 32,28 60,8' fill='none' stroke='%23c8b6ff' stroke-width='2'/></svg>" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap footrow">
+    <div class="brand" style="gap:10px">
+      <div class="mark" style="width:44px;height:44px"><img src="assets/logo_chick.png" style="width:44px;height:44px" alt="lapin"></div>
+      <div class="word" style="font-size:24px">lapin</div>
+    </div>
+    <div style="font-size:13px;color:#7c7c95">AIとデザインで、つくる楽しさを広げる学生クリエイター。</div>
+    <nav class="ftnav">
+      <a href="#apps">Apps</a>
+      <a href="#articles">Articles</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="ftsoc">
+      <a href="https://twitter.com/lapin_builds" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2H21l-6.52 7.45L22 22h-6.844l-4.79-6.26L4.8 22H2.04l6.97-7.96L2 2h7.02l4.31 5.69L18.244 2z"/></svg>
+      </a>
+      <a href="https://note.com/lapin_builds_" target="_blank" rel="noopener" aria-label="note">
+        <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5V4zm10 1.5V8h2.5L15 5.5zM7 10v2h10v-2H7zm0 4v2h7v-2H7z"/></svg>
+      </a>
+      <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.27-5.23-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.3 3.16 1.17.92-.26 1.9-.39 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.47 3.16-1.17 3.16-1.17.62 1.58.23 2.75.11 3.04.73.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+      </a>
+      <a href="mailto:laping310r0109@gmail.com" aria-label="Mail">
+        <svg viewBox="0 0 24 24"><path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11A2.5 2.5 0 0 1 19.5 20h-15A2.5 2.5 0 0 1 2 17.5v-11zm2.7-.5l7.3 5.4L19.3 6H4.7zM20 7.7l-7.4 5.5a1 1 0 0 1-1.2 0L4 7.7V17.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5V7.7z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="copy-line">© 2026 lapin. All rights reserved.</div>
+</footer>
+
+<script src="notes.js"></script>
+<script>
+(function () {
+  var grid = document.getElementById('notes-grid');
+  if (!grid || !window.NOTES) return;
+  grid.innerHTML = NOTES.slice(0, 4).map(function (n) {
+    return '<a class="note-card" href="' + n.url + '" target="_blank" rel="noopener">' +
+      '<div class="note-thumb"><img src="' + n.cover + '" alt="" loading="lazy"></div>' +
+      '<div class="body">' +
+        '<div class="meta"><span class="tag ' + n.tagClass + '">' + n.tag + '</span><span class="date">' + n.date + '</span></div>' +
+        '<h4>' + n.title + '</h4>' +
+        '<p class="ex">' + n.excerpt.replace(/\n/g, '<br>') + '</p>' +
+      '</div>' +
+    '</a>';
+  }).join('');
+})();
+</script>
+</body>
+</html>
