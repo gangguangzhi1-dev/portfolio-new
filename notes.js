@@ -1,5 +1,14 @@
 var NOTES = [
   {
+    "url": "https://note.com/lapin_builds_/n/n4ee9cbf1b046",
+    "title": "コーディング不要。AIだけでWebサイトを1日で作る方法【プロンプト全20個公開】",
+    "excerpt": "コードは書かない。ChatGPT×Claudeで1日で完成。\nプロンプト20個とその理由をすべて公開。",
+    "tag": "AI活用",
+    "tagClass": "t3",
+    "date": "2026.05.11",
+    "cover": "assets/note_cover_5.png"
+  },
+  {
     "url": "https://note.com/lapin_builds_/n/n493ac4f5f6ac",
     "title": "学生がAIに副業スケジュールを組んでもらったら、毎週動ける設計ができた話",
     "excerpt": "時間管理が苦手でも大丈夫。\n無理なく続けるコツを共有します。",
