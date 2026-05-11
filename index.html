@@ -74,6 +74,7 @@
   .nav a:nth-child(3) .dot{background:#a8d49e}
   .nav a:nth-child(4) .dot{background:#ffb6c8}
 
+  button.cta-pill{cursor:pointer;font-family:inherit}
   .cta-pill{
     position:relative;display:inline-flex;align-items:center;gap:8px;
     padding:12px 24px;border-radius:999px;color:#fff;font-weight:700;font-size:15px;
@@ -365,6 +366,52 @@
     .app-card p{font-size:12.5px}
     .scat{display:none}
   }
+
+  /* --- MODAL --- */
+  .modal-backdrop{
+    display:none;position:fixed;inset:0;z-index:100;
+    background:rgba(50,40,90,.45);backdrop-filter:blur(4px);
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-backdrop.open{display:flex}
+  .modal{
+    background:#fff;border-radius:24px;width:100%;max-width:480px;
+    box-shadow:0 32px 64px -20px rgba(100,80,200,.3);
+    padding:36px 36px 32px;position:relative;
+    animation:modal-in .25s cubic-bezier(.34,1.3,.64,1);
+  }
+  @keyframes modal-in{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+  .modal-close{
+    position:absolute;top:16px;right:18px;background:none;border:none;
+    cursor:pointer;width:32px;height:32px;display:grid;place-items:center;
+    color:#9a9ab2;border-radius:50%;transition:background .15s;
+  }
+  .modal-close:hover{background:#f0eeff}
+  .modal-close svg{width:18px;height:18px}
+  .modal h3{margin:0 0 4px;font-size:22px;font-weight:800;color:var(--ink)}
+  .modal .modal-sub{margin:0 0 24px;font-size:14px;color:var(--ink-soft)}
+  .modal label{display:block;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px}
+  .modal .field{margin-bottom:18px}
+  .modal input,.modal textarea{
+    width:100%;padding:12px 14px;border-radius:12px;
+    border:1.5px solid var(--line);font-size:14px;
+    font-family:inherit;color:var(--ink);background:#faf9ff;
+    transition:border-color .2s;box-sizing:border-box;
+  }
+  .modal input:focus,.modal textarea:focus{outline:none;border-color:var(--purple)}
+  .modal textarea{height:120px;resize:vertical;line-height:1.7}
+  .modal .submit-btn{
+    width:100%;padding:14px;border-radius:999px;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--purple),var(--purple-deep));
+    color:#fff;font-size:15px;font-weight:800;font-family:inherit;
+    transition:opacity .2s;margin-top:4px;
+  }
+  .modal .submit-btn:hover{opacity:.85}
+  .modal .submit-btn:disabled{opacity:.5;cursor:not-allowed}
+  .modal-success{text-align:center;padding:20px 0}
+  .modal-success .ok-icon{font-size:48px;margin-bottom:12px}
+  .modal-success h4{margin:0 0 8px;font-size:20px;font-weight:800}
+  .modal-success p{margin:0;font-size:14px;color:var(--ink-soft);line-height:1.8}
 </style>
 </head>
 <body>
@@ -382,7 +429,7 @@
       <a href="#about"><span class="dot"></span>About</a>
       <a href="#contact"><span class="dot"></span>Contact</a>
     </nav>
-    <a href="#contact" class="cta-pill"><span class="ic"></span>相談してみる</a>
+    <button class="cta-pill" id="open-modal"><span class="ic"></span>相談してみる</button>
   </div>
 </header>
 
@@ -585,8 +632,83 @@
   <div class="copy-line">© 2026 lapin. All rights reserved.</div>
 </footer>
 
+<!-- CONTACT MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="modal-form-wrap">
+      <h3>お問い合わせ</h3>
+      <p class="modal-sub">お気軽にどうぞ。24時間以内にご連絡します。</p>
+      <form id="contact-form" action="https://formspree.io/f/xjgljvkn" method="POST">
+        <div class="field">
+          <label for="cf-name">お名前</label>
+          <input id="cf-name" type="text" name="name" placeholder="山田 太郎" required>
+        </div>
+        <div class="field">
+          <label for="cf-email">メールアドレス</label>
+          <input id="cf-email" type="email" name="email" placeholder="example@mail.com" required>
+        </div>
+        <div class="field">
+          <label for="cf-msg">ご相談内容</label>
+          <textarea id="cf-msg" name="message" placeholder="ご相談・ご依頼の内容をお書きください。" required></textarea>
+        </div>
+        <button class="submit-btn" type="submit">送信する</button>
+      </form>
+    </div>
+    <div class="modal-success" id="modal-success" style="display:none">
+      <div class="ok-icon">✉️</div>
+      <h4>送信しました！</h4>
+      <p>お問い合わせありがとうございます。<br>24時間以内にご連絡いたします。</p>
+    </div>
+  </div>
+</div>
+
 <script src="notes.js"></script>
 <script>
+(function () {
+  var backdrop = document.getElementById('modal-backdrop');
+  var openBtn  = document.getElementById('open-modal');
+  var closeBtn = document.getElementById('modal-close');
+  var form     = document.getElementById('contact-form');
+  var success  = document.getElementById('modal-success');
+  var formWrap = document.getElementById('modal-form-wrap');
+
+  function openModal() { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { backdrop.classList.remove('open'); document.body.style.overflow = ''; }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', function(e) { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.textContent = '送信中…';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res) {
+      if (res.ok) {
+        formWrap.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = '送信する';
+        alert('送信に失敗しました。時間をおいて再度お試しください。');
+      }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = '送信する';
+      alert('送信に失敗しました。時間をおいて再度お試しください。');
+    });
+  });
+})();
+
 (function () {
   var grid = document.getElementById('notes-grid');
   if (!grid || !window.NOTES) return;
