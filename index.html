@@ -243,12 +243,14 @@
     overflow:hidden;border:1px solid rgba(255,255,255,.5);
     box-shadow:0 30px 60px -30px rgba(150,120,220,.45);
   }
-  .contact h3{margin:0 0 6px;font-size:30px;font-weight:900;color:#3a3a55;display:inline-flex;align-items:center;gap:14px}
+  .contact{text-align:center}
+  .contact h3{margin:0 0 6px;font-size:30px;font-weight:900;color:#3a3a55;display:inline-flex;align-items:center;gap:14px;justify-content:center}
   .contact h3 .cv{font-family:"Caveat",cursive;font-size:22px;color:#a9a3d0;font-weight:700}
-  .contact .copy{font-size:15.5px;color:#3a3a55;margin:8px 0 28px;font-weight:600}
-  .contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:start}
-  .small-copy{margin:0;color:#3a3a55;font-size:13px;line-height:2}
-  .socials{display:flex;gap:14px;justify-content:flex-end;margin-bottom:18px;flex-wrap:wrap}
+  .contact .copy{font-size:15.5px;color:#3a3a55;margin:8px 0 6px;font-weight:600}
+  .contact .small-copy{margin:0 0 28px;color:#5a5a7a;font-size:13px;line-height:2}
+  .contact-grid{display:flex;flex-direction:column;align-items:center;gap:0}
+  .contact-or{margin:20px 0 16px;font-size:12px;font-weight:700;color:#b0adc8;letter-spacing:.1em}
+  .socials{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .soc{
     background:#fff;border-radius:14px;padding:12px 22px;font-weight:800;font-size:14.5px;
     display:inline-flex;align-items:center;gap:10px;color:#3a3a55;
@@ -335,7 +337,7 @@
     .contact h3{font-size:24px;flex-wrap:wrap}
     .contact h3 .cv{font-size:18px}
     .contact .copy{font-size:14px}
-    .contact-grid{grid-template-columns:1fr;gap:20px}
+    .contact-grid{gap:0}
     .socials{flex-wrap:wrap;justify-content:center;gap:10px}
     .soc{padding:10px 16px;font-size:13px}
     .contact-cta{justify-content:center}
@@ -578,28 +580,19 @@
       <h3>お問い合わせ <span class="cv">Contact</span></h3>
       <p class="copy">Web制作のご相談・コラボ・ご依頼はこちら</p>
 
+      <p class="small-copy">小さなご相談でも大歓迎です。一緒に、あなたのアイデアをカタチにしましょう！</p>
       <div class="contact-grid">
-        <div>
-          <p class="small-copy">
-            小さなご相談でも大歓迎です。<br>
-            一緒に、あなたのアイデアをカタチにしましょう！<br>
-            <br>
-            上のフォームか、XのDMからお気軽にどうぞ。<br>
-            基本的に24時間以内にお返事します。
-          </p>
-        </div>
-        <div>
-          <button class="cta-pill" onclick="document.getElementById('modal-backdrop').classList.add('open');document.body.style.overflow='hidden'" style="margin-bottom:24px"><span class="ic"></span>相談してみる</button>
-          <div class="socials">
-            <a class="soc x" href="https://twitter.com/lapin_builds" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24"><path d="M18.244 2H21l-6.52 7.45L22 22h-6.844l-4.79-6.26L4.8 22H2.04l6.97-7.96L2 2h7.02l4.31 5.69L18.244 2zm-2.4 18h1.84L8.27 4H6.31l9.534 16z"/></svg>
-              X
-            </a>
-            <a class="soc note" href="https://note.com/lapin_builds_" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5V4zm10 1.5V8h2.5L15 5.5zM7 10v2h10v-2H7zm0 4v2h7v-2H7z"/></svg>
-              note
-            </a>
-          </div>
+        <button class="cta-pill" onclick="document.getElementById('modal-backdrop').classList.add('open');document.body.style.overflow='hidden'"><span class="ic"></span>相談してみる</button>
+        <p class="contact-or">または</p>
+        <div class="socials">
+          <a class="soc x" href="https://twitter.com/lapin_builds" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2H21l-6.52 7.45L22 22h-6.844l-4.79-6.26L4.8 22H2.04l6.97-7.96L2 2h7.02l4.31 5.69L18.244 2zm-2.4 18h1.84L8.27 4H6.31l9.534 16z"/></svg>
+            X（DM）
+          </a>
+          <a class="soc note" href="https://note.com/lapin_builds_" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5V4zm10 1.5V8h2.5L15 5.5zM7 10v2h10v-2H7zm0 4v2h7v-2H7z"/></svg>
+            note
+          </a>
         </div>
       </div>
       <img class="chick-heart" src="assets/part_024.png" alt="">
